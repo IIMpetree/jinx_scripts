@@ -1,0 +1,26 @@
+:init
+	initial_frame = 1
+
+	y_prev = 0
+	y = 0
+end
+
+:render
+	if initial_frame
+		initial_frame = 0
+		clear
+	endif
+
+	pget 0, y+1, r, g, b
+
+	line 0, y_prev, matrix_x-1, y_prev, 0, 0, 0
+	line 0, y, matrix_x-1, y, 255, 255, 255
+
+	if (r <> 0 & g <> 0 & b <> 0) | y >= matrix_y-1
+		y_prev = 0
+		y = 0
+	else
+		y_prev = y
+		y = y+1
+	endif
+end
