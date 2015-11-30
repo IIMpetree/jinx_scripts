@@ -1,0 +1,35 @@
+:init
+	config movement_speed = 1
+	config color_speed = 10
+	config fade_speed = 30
+
+	x = 0
+	y = 0
+	hue = 0
+end
+
+:render
+	fade fade_speed 
+	hsv2rgb hue, 255, 255, r, g, b
+
+	yy = y
+	for xx = x-movement_speed+1 to x+movement_speed-1
+		pset xx, yy, r, g, b
+	next
+
+	x = x+movement_speed
+	if x > matrix_x-1
+		x = 0
+		y = y+1
+
+		if y > matrix_y-1
+			x = 0
+			y = 0
+		endif
+	endif
+
+	hue = hue+color_speed
+	if hue > 360
+		hue = 0
+	endif
+end
