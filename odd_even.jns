@@ -1,0 +1,32 @@
+:init
+	config period = 12
+	config column_width = 2
+
+	cycle = 0
+	even = 1
+end
+
+:render
+	clear
+
+	cycle = cycle+1
+	if cycle >= period
+	cycle = 0
+		if even = 1
+			even = 0
+		else
+			even = 1
+		endif
+	endif
+
+	if even = 1
+		x = 0
+	else
+		x = column_width
+	endif
+
+	while x < matrix_x 
+		rect x, 0, x+column_width-1, matrix_y-1, 255, 255, 255, 1
+		x = x + column_width*2
+	wend
+end
