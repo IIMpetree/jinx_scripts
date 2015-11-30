@@ -1,0 +1,39 @@
+:init
+	config y_speed = 0.5
+	config fade_speed = 25
+	config change_dir_probability = 0.45
+
+	config color_r = 0
+	config color_g = 255
+	config color_b = 0
+
+	y = round(matrix_y/2)
+	dy = y_speed
+end
+
+:render
+	fade fade_speed
+
+	y_pos = y
+	if y_pos > matrix_y-1
+		y_pos = matrix_y-1
+	else if y_pos < 0
+		y_pos = 0
+	endif
+
+	line 0, y_pos, matrix_x-1, y_pos, color_r, color_g, color_b
+
+	if y < 0
+		y = y + y_speed
+		dy = y_speed
+	else if y > matrix_y
+		y = y - y_speed
+		dy = -y_speed
+	else
+		if rnd(100)/100 <= change_dir_probability
+			dy = -dy
+		endif
+
+		y = y + dy
+	endif
+end
