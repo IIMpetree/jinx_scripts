@@ -1,0 +1,20 @@
+:init
+	config line_delay = 25
+	delay = 0
+	#initial_frame = 1
+end
+
+:render
+	#if initial_frame
+	#	initial_frame = 0
+	#	clear
+	#endif
+	if delay > 0
+		delay = delay - 1
+	else
+	scroll 0,-1
+	# draw line
+	line 0, matrix_y - 1, matrix_x, matrix_y - 1, autocolor_red, autocolor_green, autocolor_blue
+	delay = line_delay
+	endif
+end
